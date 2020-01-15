@@ -26,7 +26,7 @@
             <property name="suppressAllComments" value="true"/>
         </commentGenerator>
         <!--数据库链接URL，用户名、密码 -->
-        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://129.211.88.251:3306/forbessystem" userId="forbessystem" password="JBEnDXDKsC7iAkZG">
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://129.211.88.251:3306/f_smartwork" userId="f_smartwork" password="idwcpkznkRP6d6RB">
         </jdbcConnection>
         <javaTypeResolver>
             <property name="forceBigDecimals" value="false"/>
@@ -45,7 +45,7 @@
         <javaClientGenerator type="XMLMAPPER" targetPackage="org.forbes.dal.mapper" targetProject="src/main/java">
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
-        <table tableName="f_ad_attach"  domainObjectName="AdAttach"          enableSelectByPrimaryKey="true"
+        <table tableName="f_requirement"  domainObjectName="Requirement"          enableSelectByPrimaryKey="true"
         								   								  enableDeleteByPrimaryKey="true"
         								   								  enableUpdateByPrimaryKey="true"
         								   								  enableCountByExample="false" 
@@ -56,7 +56,7 @@
         								   								  selectByPrimaryKeyQueryId="false">
         	<property name="useActualColumnNames" value="false"/>
         </table>
-        <table tableName="f_ad_position"  domainObjectName="AdPosition"          enableSelectByPrimaryKey="true"
+        <table tableName="f_skill"  domainObjectName="Skill"          enableSelectByPrimaryKey="true"
         								   								  enableDeleteByPrimaryKey="true"
         								   								  enableUpdateByPrimaryKey="true"
         								   								  enableCountByExample="false" 
@@ -67,7 +67,7 @@
         								   								  selectByPrimaryKeyQueryId="false">
         	<property name="useActualColumnNames" value="false"/>
         </table>
-        <table tableName="f_floor"  domainObjectName="Floor"          enableSelectByPrimaryKey="true"
+        <table tableName="f_skill_requirement"  domainObjectName="SkillRequirement"          enableSelectByPrimaryKey="true"
         								   								  enableDeleteByPrimaryKey="true"
         								   								  enableUpdateByPrimaryKey="true"
         								   								  enableCountByExample="false" 
@@ -78,7 +78,7 @@
         								   								  selectByPrimaryKeyQueryId="false">
         	<property name="useActualColumnNames" value="false"/>
         </table>
-        <table tableName="f_message"  domainObjectName="Message"          enableSelectByPrimaryKey="true"
+        <table tableName="f_user_requirement"  domainObjectName="UserRequirement"          enableSelectByPrimaryKey="true"
         								   								  enableDeleteByPrimaryKey="true"
         								   								  enableUpdateByPrimaryKey="true"
         								   								  enableCountByExample="false" 
@@ -89,7 +89,7 @@
         								   								  selectByPrimaryKeyQueryId="false">
         	<property name="useActualColumnNames" value="false"/>
         </table>
-        <table tableName="f_msg_template"  domainObjectName="MsgTemplate"          enableSelectByPrimaryKey="true"
+        <table tableName="f_worker_requirement"  domainObjectName="WorkerRequirement"          enableSelectByPrimaryKey="true"
         								   								  enableDeleteByPrimaryKey="true"
         								   								  enableUpdateByPrimaryKey="true"
         								   								  enableCountByExample="false" 
@@ -97,50 +97,6 @@
         								   								  enableDeleteByExample="false" 
         								   								  enableSelectByExample="false" 
         								   								  selectByExampleQueryId="false" 
-        								   								  selectByPrimaryKeyQueryId="false">
-        	<property name="useActualColumnNames" value="false"/>
-        </table>
-		<table tableName="f_navigation"  domainObjectName="Navigation"          enableSelectByPrimaryKey="true"
-        								   								  enableDeleteByPrimaryKey="true"
-        								   								  enableUpdateByPrimaryKey="true"
-        								   								  enableCountByExample="false"
-        								   								  enableUpdateByExample="false"
-        								   								  enableDeleteByExample="false"
-        								   								  enableSelectByExample="false"
-        								   								  selectByExampleQueryId="false"
-        								   								  selectByPrimaryKeyQueryId="false">
-        	<property name="useActualColumnNames" value="false"/>
-        </table>
-		<table tableName="f_navigation_group"  domainObjectName="NavigationGroup"          enableSelectByPrimaryKey="true"
-        								   								  enableDeleteByPrimaryKey="true"
-        								   								  enableUpdateByPrimaryKey="true"
-        								   								  enableCountByExample="false"
-        								   								  enableUpdateByExample="false"
-        								   								  enableDeleteByExample="false"
-        								   								  enableSelectByExample="false"
-        								   								  selectByExampleQueryId="false"
-        								   								  selectByPrimaryKeyQueryId="false">
-        	<property name="useActualColumnNames" value="false"/>
-        </table>
-		<table tableName="f_news"  domainObjectName="News"          enableSelectByPrimaryKey="true"
-        								   								  enableDeleteByPrimaryKey="true"
-        								   								  enableUpdateByPrimaryKey="true"
-        								   								  enableCountByExample="false"
-        								   								  enableUpdateByExample="false"
-        								   								  enableDeleteByExample="false"
-        								   								  enableSelectByExample="false"
-        								   								  selectByExampleQueryId="false"
-        								   								  selectByPrimaryKeyQueryId="false">
-        	<property name="useActualColumnNames" value="false"/>
-        </table>
-		<table tableName="f_news_attach"  domainObjectName="NewsAttach"          enableSelectByPrimaryKey="true"
-        								   								  enableDeleteByPrimaryKey="true"
-        								   								  enableUpdateByPrimaryKey="true"
-        								   								  enableCountByExample="false"
-        								   								  enableUpdateByExample="false"
-        								   								  enableDeleteByExample="false"
-        								   								  enableSelectByExample="false"
-        								   								  selectByExampleQueryId="false"
         								   								  selectByPrimaryKeyQueryId="false">
         	<property name="useActualColumnNames" value="false"/>
         </table>

@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.forbes.dal.mapper.RequirementMapper" >
+  <resultMap id="BaseResultMap" type="org.forbes.dal.entity.Requirement" >
+    <!-- id -->
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <!-- 需求名称 -->
+    <result column="r_name" property="rName" jdbcType="VARCHAR" />
+    <!-- 需求创建时间 -->
+    <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
+    <!-- 需求修改时间 -->
+    <result column="updatetime" property="updatetime" jdbcType="TIMESTAMP" />
+    <!-- 最低薪水 -->
+    <result column="min_salary" property="minSalary" jdbcType="DECIMAL" />
+    <!-- 最高薪水 -->
+    <result column="max_salary" property="maxSalary" jdbcType="DECIMAL" />
+    <!-- 行业类型 -->
+    <result column="vocation_type" property="vocationType" jdbcType="VARCHAR" />
+    <!-- 任务类型 -->
+    <result column="task_type" property="taskType" jdbcType="VARCHAR" />
+    <!-- 项目周期（xx个月） -->
+    <result column="cycle_time" property="cycleTime" jdbcType="INTEGER" />
+    <!-- 项目要求,描述 -->
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <!-- 审核状态（0未通过1通过(初期默认通过)2待审核） -->
+    <result column="check_state" property="checkState" jdbcType="VARCHAR" />
+    <!-- 是否议价（0不可议价1可议价） -->
+    <result column="is_premium" property="isPremium" jdbcType="VARCHAR" />
+    <!-- 竞标人数 -->
+    <result column="amount" property="amount" jdbcType="INTEGER" />
+    <!-- 是否外派 -->
+    <result column="is_assignment" property="isAssignment" jdbcType="VARCHAR" />
+    <!-- 创建人 -->
+    <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+    <!-- 创建时间 -->
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <!-- 修改时间 -->
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <!-- 修改人 -->
+    <result column="update_by" property="updateBy" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, r_name, createtime, updatetime, min_salary, max_salary, vocation_type, task_type, 
+    cycle_time, description, check_state, is_premium, amount, is_assignment, create_by, 
+    create_time, update_time, update_by
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from f_requirement
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from f_requirement
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" >
+    insert into f_requirement (id, r_name, createtime, 
+      updatetime, min_salary, max_salary, 
+      vocation_type, task_type, cycle_time, 
+      description, check_state, is_premium, 
+      amount, is_assignment, create_by, 
+      create_time, update_time, update_by
+      )
+    values (#{id,jdbcType=BIGINT}, #{rName,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{updatetime,jdbcType=TIMESTAMP}, #{minSalary,jdbcType=DECIMAL}, #{maxSalary,jdbcType=DECIMAL}, 
+      #{vocationType,jdbcType=VARCHAR}, #{taskType,jdbcType=VARCHAR}, #{cycleTime,jdbcType=INTEGER}, 
+      #{description,jdbcType=VARCHAR}, #{checkState,jdbcType=VARCHAR}, #{isPremium,jdbcType=VARCHAR}, 
+      #{amount,jdbcType=INTEGER}, #{isAssignment,jdbcType=VARCHAR}, #{createBy,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" >
+    insert into f_requirement
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="rName != null" >
+        r_name,
+      </if>
+      <if test="createtime != null" >
+        createtime,
+      </if>
+      <if test="updatetime != null" >
+        updatetime,
+      </if>
+      <if test="minSalary != null" >
+        min_salary,
+      </if>
+      <if test="maxSalary != null" >
+        max_salary,
+      </if>
+      <if test="vocationType != null" >
+        vocation_type,
+      </if>
+      <if test="taskType != null" >
+        task_type,
+      </if>
+      <if test="cycleTime != null" >
+        cycle_time,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+      <if test="checkState != null" >
+        check_state,
+      </if>
+      <if test="isPremium != null" >
+        is_premium,
+      </if>
+      <if test="amount != null" >
+        amount,
+      </if>
+      <if test="isAssignment != null" >
+        is_assignment,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="updateBy != null" >
+        update_by,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="rName != null" >
+        #{rName,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null" >
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="minSalary != null" >
+        #{minSalary,jdbcType=DECIMAL},
+      </if>
+      <if test="maxSalary != null" >
+        #{maxSalary,jdbcType=DECIMAL},
+      </if>
+      <if test="vocationType != null" >
+        #{vocationType,jdbcType=VARCHAR},
+      </if>
+      <if test="taskType != null" >
+        #{taskType,jdbcType=VARCHAR},
+      </if>
+      <if test="cycleTime != null" >
+        #{cycleTime,jdbcType=INTEGER},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="checkState != null" >
+        #{checkState,jdbcType=VARCHAR},
+      </if>
+      <if test="isPremium != null" >
+        #{isPremium,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null" >
+        #{amount,jdbcType=INTEGER},
+      </if>
+      <if test="isAssignment != null" >
+        #{isAssignment,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" >
+    update f_requirement
+    <set >
+      <if test="rName != null" >
+        r_name = #{rName,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null" >
+        updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="minSalary != null" >
+        min_salary = #{minSalary,jdbcType=DECIMAL},
+      </if>
+      <if test="maxSalary != null" >
+        max_salary = #{maxSalary,jdbcType=DECIMAL},
+      </if>
+      <if test="vocationType != null" >
+        vocation_type = #{vocationType,jdbcType=VARCHAR},
+      </if>
+      <if test="taskType != null" >
+        task_type = #{taskType,jdbcType=VARCHAR},
+      </if>
+      <if test="cycleTime != null" >
+        cycle_time = #{cycleTime,jdbcType=INTEGER},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="checkState != null" >
+        check_state = #{checkState,jdbcType=VARCHAR},
+      </if>
+      <if test="isPremium != null" >
+        is_premium = #{isPremium,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null" >
+        amount = #{amount,jdbcType=INTEGER},
+      </if>
+      <if test="isAssignment != null" >
+        is_assignment = #{isAssignment,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        update_by = #{updateBy,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" >
+    update f_requirement
+    set r_name = #{rName,jdbcType=VARCHAR},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      min_salary = #{minSalary,jdbcType=DECIMAL},
+      max_salary = #{maxSalary,jdbcType=DECIMAL},
+      vocation_type = #{vocationType,jdbcType=VARCHAR},
+      task_type = #{taskType,jdbcType=VARCHAR},
+      cycle_time = #{cycleTime,jdbcType=INTEGER},
+      description = #{description,jdbcType=VARCHAR},
+      check_state = #{checkState,jdbcType=VARCHAR},
+      is_premium = #{isPremium,jdbcType=VARCHAR},
+      amount = #{amount,jdbcType=INTEGER},
+      is_assignment = #{isAssignment,jdbcType=VARCHAR},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      update_by = #{updateBy,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
