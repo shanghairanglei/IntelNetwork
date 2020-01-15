@@ -8,6 +8,7 @@ import lombok.Data;
  */
 @Data
 public class Skill extends BaseEntity {
+    private static final long serialVersionUID = -3889712948410672856L;
     /**
      * id
      * Table:     f_skill

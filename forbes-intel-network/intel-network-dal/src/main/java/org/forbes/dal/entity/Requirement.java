@@ -9,6 +9,8 @@ import lombok.Data;
  */
 @Data
 public class Requirement extends BaseEntity {
+
+    private static final long serialVersionUID = -1113065399582467964L;
     /**
      * id
      * Table:     f_requirement

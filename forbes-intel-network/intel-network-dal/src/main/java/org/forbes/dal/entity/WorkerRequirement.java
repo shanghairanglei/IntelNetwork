@@ -8,6 +8,7 @@ import lombok.Data;
  */
 @Data
 public class WorkerRequirement extends BaseEntity {
+    private static final long serialVersionUID = -817172619463424915L;
     /**
      * id
      * Table:     f_worker_requirement

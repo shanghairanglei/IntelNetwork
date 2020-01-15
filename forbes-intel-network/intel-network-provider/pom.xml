@@ -20,7 +20,7 @@
   <dependencies>
     <dependency>
       <groupId>org.forbes</groupId>
-      <artifactId>intel-network-conmm</artifactId>
+      <artifactId>intel-network-comm</artifactId>
       <version>0.0.1-SNAPSHOT</version>
     </dependency>
     <dependency>
