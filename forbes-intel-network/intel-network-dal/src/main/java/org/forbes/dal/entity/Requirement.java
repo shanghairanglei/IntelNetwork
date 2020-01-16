@@ -139,5 +139,14 @@ public class Requirement extends BaseEntity {
     @ApiModelProperty(value = "服务方(0:不限制,1:个人,2:团队)",required = true)
     private String partyB;
 
+    /**
+     * 需求所属用户的id
+     * Table:     f_requirement
+     * Column:    user_id
+     * Nullable:  true
+     */
+    @ApiModelProperty(value = "需求所属用户的id",required = true)
+    private Long userId;
+
 
 }

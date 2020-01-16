@@ -7,15 +7,16 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.MultipartConfigFactory;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
-import org.springframework.cloud.netflix.feign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
 
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
+/**
+ * @author Administrator
+ */
 @SpringBootApplication
 @EnableDiscoveryClient
 @EnableSwagger2
-@EnableFeignClients
 @MapperScan(basePackages = {"org.forbes.dal.mapper"})
 public class ForbesApplication {
 
@@ -43,7 +44,8 @@ public class ForbesApplication {
     public MultipartConfigElement multipartConfigElement() {
         MultipartConfigFactory factory = new MultipartConfigFactory();
         //单个文件最大
-        factory.setMaxFileSize("30MB"); //KB,MB
+        //KB,MB
+        factory.setMaxFileSize("30MB");
         /// 设置总上传数据总大小
         factory.setMaxRequestSize("30MB");
         return factory.createMultipartConfig();

@@ -120,6 +120,10 @@
     </dependency>
     <!--feign-->
     <dependency>
+      <groupId>org.springframework.cloud</groupId>
+      <artifactId>spring-cloud-starter-openfeign</artifactId>
+    </dependency>
+    <dependency>
       <groupId>io.github.openfeign</groupId>
       <artifactId>feign-core</artifactId>
     </dependency>
@@ -245,6 +249,7 @@
     <module>intel-network-config</module>
     <module>intel-network-biz</module>
     <module>intel-network-provider</module>
+    <module>intel-network-client</module>
   </modules>
 
   <build>

@@ -38,11 +38,12 @@
         <result column="icon" property="icon" jdbcType="VARCHAR"/>
         <!-- 服务方(0:不限制,1:个人,2:团队) -->
         <result column="party_B" property="partyB" jdbcType="VARCHAR"/>
+        <!-- 服务方(0:不限制,1:个人,2:团队) -->
+        <result column="user_id" property="userId" jdbcType="VARCHAR"/>
     </resultMap>
-
     <sql id="Base_Column_List">
     id, create_by, create_time, update_time, update_by, name, min_salary, max_salary, vocation_type, task_type,
-    cycle_time, description, check_state, is_premium, amount, is_assignment, icon, party_B
+    cycle_time, description, check_state, is_premium, amount, is_assignment, icon, party_B, user_id
   </sql>
 
 </mapper>

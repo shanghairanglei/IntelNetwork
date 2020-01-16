@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import forbes.servcie.ISysUserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -16,8 +17,13 @@ import org.forbes.comm.enums.BizResultEnum;
 import org.forbes.comm.enums.CheckStateEnum;
 import org.forbes.comm.model.BasePageDto;
 import org.forbes.comm.model.RequirementPageDto;
+import org.forbes.comm.model.SysUser;
 import org.forbes.comm.utils.ConvertUtils;
+import org.forbes.comm.vo.LoginVo;
 import org.forbes.comm.vo.Result;
+import org.forbes.comm.vo.SysUserVo;
+import org.forbes.config.RedisUtil;
+import org.forbes.config.cache.UserCache;
 import org.forbes.dal.entity.Requirement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
@@ -36,7 +42,11 @@ public class RequirementController {
 
     @Autowired
     IRequirementService requirementService;
+    @Autowired
+    ISysUserService sysUserService;
 
+    @Autowired
+    RedisUtil redisUtil;
 
     /***
      * selectPage方法慨述:分页查询任务需求列表
@@ -147,6 +157,12 @@ public class RequirementController {
             //描述为空
             result.setBizCode(BizResultEnum.DESCRIPTION.getBizCode());
             result.setMessage(BizResultEnum.DESCRIPTION.getBizMessage());
+            return result;
+        }
+        if (ConvertUtils.isEmpty(requirement.getUserId())) {
+            //发布人id为空
+            result.setBizCode(BizResultEnum.USER_ID.getBizCode());
+            result.setMessage(BizResultEnum.USER_ID.getBizMessage());
             return result;
         }
         //给定默认审核状态待审核
