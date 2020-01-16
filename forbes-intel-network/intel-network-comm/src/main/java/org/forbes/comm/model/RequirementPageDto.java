@@ -44,15 +44,6 @@ public class RequirementPageDto implements Serializable {
     private BigDecimal maxSalary;
 
     /**
-     * 行业类型
-     * Table:     f_requirement
-     * Column:    vocation_type
-     * Nullable:  true
-     */
-    @ApiModelProperty(value = "行业类型")
-    private String vocationType;
-
-    /**
      * 任务类型
      * Table:     f_requirement
      * Column:    task_type
@@ -60,4 +51,13 @@ public class RequirementPageDto implements Serializable {
      */
     @ApiModelProperty(value = "任务类型")
     private String taskType;
+
+    /**
+     * 行业类型名称
+     * Table:     f_vocation_type
+     * Column:    vocation_name
+     * Nullable:  true
+     */
+    @ApiModelProperty(value = "行业类型名称")
+    private String vocationName;
 }

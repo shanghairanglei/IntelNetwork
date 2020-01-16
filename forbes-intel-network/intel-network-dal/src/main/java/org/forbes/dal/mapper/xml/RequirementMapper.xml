@@ -18,8 +18,6 @@
         <result column="min_salary" property="minSalary" jdbcType="DECIMAL"/>
         <!-- 最高薪水 -->
         <result column="max_salary" property="maxSalary" jdbcType="DECIMAL"/>
-        <!-- 行业类型 -->
-        <result column="vocation_type" property="vocationType" jdbcType="VARCHAR"/>
         <!-- 任务类型(0佣金任务1周期任务2包月任务) -->
         <result column="task_type" property="taskType" jdbcType="VARCHAR"/>
         <!-- 项目周期（xx个月） -->
@@ -38,12 +36,55 @@
         <result column="icon" property="icon" jdbcType="VARCHAR"/>
         <!-- 服务方(0:不限制,1:个人,2:团队) -->
         <result column="party_B" property="partyB" jdbcType="VARCHAR"/>
-        <!-- 服务方(0:不限制,1:个人,2:团队) -->
+        <!-- 所属用户id -->
         <result column="user_id" property="userId" jdbcType="VARCHAR"/>
+        <!-- vocation_type_id -->
+        <result column="vocation_type_id" property="vocationTypeId" jdbcType="VARCHAR"/>
     </resultMap>
     <sql id="Base_Column_List">
-    id, create_by, create_time, update_time, update_by, name, min_salary, max_salary, vocation_type, task_type,
-    cycle_time, description, check_state, is_premium, amount, is_assignment, icon, party_B, user_id
+    id, create_by, create_time, update_time, update_by, name, min_salary, max_salary, task_type,
+    cycle_time, description, check_state, is_premium, amount, is_assignment, icon, party_B, user_id, vocation_type_id
   </sql>
+
+    <select id="reqPage" resultType="org.forbes.comm.vo.RequirementVo">
+        SELECT
+        r.id,
+        r.create_by,
+        r.create_time,
+        r.update_time,
+        r.update_by,
+        r.name,
+        r.min_salary,
+        r.max_salary,
+        r.task_type,
+        r.cycle_time,
+        r.description,
+        r.check_state,
+        r.is_premium,
+        r.amount,
+        r.is_assignment,
+        r.icon,
+        r.party_B,
+        r.user_id,
+        v.vocation_name
+        FROM f_requirement r JOIN f_vocation_type v ON r.id = v.requirement_id
+        <where>
+            <if test="pageDto.name != null and pageDto.name !='' and pageDto.name != 'null'">
+                AND r.name LIKE concat('%',#{pageDto.name,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="pageDto.minSalary != null">
+                AND r.min_salary &gt; #{pageDto.minSalary,jdbcType=DECIMAL}
+            </if>
+            <if test="pageDto.maxSalary != null">
+                AND r.max_salary &lt; #{pageDto.maxSalary,jdbcType=DECIMAL}
+            </if>
+            <if test="pageDto.taskType != null and pageDto.taskType !='' and pageDto.taskType != 'null'">
+                AND r.task_type = #{pageDto.taskType,jdbcType=VARCHAR}
+            </if>
+            <if test="pageDto.vocationName != null and pageDto.vocationName !='' and pageDto.vocationName != 'null'">
+                AND v.vocation_name = #{pageDto.vocationName,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </select>
 
 </mapper>

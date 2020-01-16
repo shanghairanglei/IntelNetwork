@@ -1,29 +1,23 @@
-package org.forbes.requirementController;
+package org.forbes.controller;
 
 import com.alibaba.fastjson.JSON;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import forbes.servcie.ISysUserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import lombok.extern.slf4j.Slf4j;
 import org.forbes.IRequirementService;
-import org.forbes.comm.constant.ReqCommonConstant;
 import org.forbes.comm.constant.SaveValid;
 import org.forbes.comm.enums.BizResultEnum;
 import org.forbes.comm.enums.CheckStateEnum;
 import org.forbes.comm.model.BasePageDto;
 import org.forbes.comm.model.RequirementPageDto;
-import org.forbes.comm.model.SysUser;
 import org.forbes.comm.utils.ConvertUtils;
-import org.forbes.comm.vo.LoginVo;
+import org.forbes.comm.vo.RequirementVo;
 import org.forbes.comm.vo.Result;
-import org.forbes.comm.vo.SysUserVo;
 import org.forbes.config.RedisUtil;
-import org.forbes.config.cache.UserCache;
 import org.forbes.dal.entity.Requirement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
@@ -42,8 +36,6 @@ public class RequirementController {
 
     @Autowired
     IRequirementService requirementService;
-    @Autowired
-    ISysUserService sysUserService;
 
     @Autowired
     RedisUtil redisUtil;
@@ -63,30 +55,11 @@ public class RequirementController {
             @ApiResponse(code = 500, message = Result.REQUIREMENT_ERROR_MSG),
             @ApiResponse(code = 200, message = Result.REQUIREMENT_MSG)
     })
-    public Result<IPage<Requirement>> selectPage(BasePageDto pageDto, RequirementPageDto requirementPageDto) {
-        log.debug("传入参数为：" + JSON.toJSONString(requirementPageDto));
-        Result<IPage<Requirement>> result = new Result<>();
-        QueryWrapper<Requirement> qw = new QueryWrapper<Requirement>();
-        if (ConvertUtils.isNotEmpty(requirementPageDto)) {
-            //行业类型
-            if (ConvertUtils.isNotEmpty(requirementPageDto.getVocationType())) {
-                qw.eq(ReqCommonConstant.VOCATION_TYPE, requirementPageDto.getVocationType());
-            }
-            //任务类型
-            if (ConvertUtils.isNotEmpty(requirementPageDto.getTaskType())) {
-                qw.eq(ReqCommonConstant.TASK_TYPE, requirementPageDto.getTaskType());
-            }
-            //金额最低
-            if (ConvertUtils.isNotEmpty(requirementPageDto.getMinSalary())) {
-                qw.ge(ReqCommonConstant.MIN_SALARY, requirementPageDto.getMinSalary());
-            }
-            //金额最高
-            if (ConvertUtils.isNotEmpty(requirementPageDto.getMaxSalary())) {
-                qw.le(ReqCommonConstant.MAX_SALARY, requirementPageDto.getMaxSalary());
-            }
-        }
-        IPage<Requirement> page = new Page<Requirement>(pageDto.getPageNo(), pageDto.getPageSize());
-        IPage<Requirement> requirements = requirementService.page(page, qw);
+    public Result<IPage<RequirementVo>> selectPage(BasePageDto pageDto, RequirementPageDto PageDto) {
+        log.debug("传入参数为：" + JSON.toJSONString(PageDto));
+        Result<IPage<RequirementVo>> result = new Result<>();
+        IPage<RequirementVo> page = new Page<RequirementVo>(pageDto.getPageNo(), pageDto.getPageSize());
+        IPage<RequirementVo> requirements = requirementService.reqPage(page, PageDto);
         result.setResult(requirements);
         log.debug("返回值为:" + JSON.toJSONString(result.getResult()));
         return result;
@@ -94,8 +67,8 @@ public class RequirementController {
 
 
     /***
-     * selectPage方法慨述:添加任务需求
-     * @param requirement
+     * add方法慨述:添加任务需求
+     * @param requirementVo
      * @return Result<SysPermission>
      * @创建人 frunk
      * @创建时间 2019年12月10日 下午1:48:45
@@ -108,67 +81,68 @@ public class RequirementController {
             @ApiResponse(code = 500, message = Result.ADD_REQUIREMENT_ERROR_MSG),
             @ApiResponse(code = 200, message = Result.ADD_REQUIREMENT_MSG)
     })
-    public Result<Requirement> add(@RequestBody @Validated(value = SaveValid.class) Requirement requirement) {
-        log.debug("传入参数为：" + JSON.toJSONString(requirement));
-        Result<Requirement> result = new Result<Requirement>();
-        if (ConvertUtils.isEmpty(requirement)) {
+    public Result<RequirementVo> add(@RequestBody @Validated(value = SaveValid.class) RequirementVo requirementVo) {
+        log.debug("传入参数为：" + JSON.toJSONString(requirementVo));
+        Result<RequirementVo> result = new Result<RequirementVo>();
+        if (ConvertUtils.isEmpty(requirementVo)) {
             //任务对象为空
             result.setBizCode(BizResultEnum.ENTITY_EMPTY.getBizCode());
             result.setMessage(BizResultEnum.ENTITY_EMPTY.getBizMessage());
             return result;
         }
-        if (ConvertUtils.isEmpty(requirement.getName())) {
+        if (ConvertUtils.isEmpty(requirementVo.getName())) {
             //任务名称为空
             result.setBizCode(BizResultEnum.R_NAME.getBizCode());
             result.setMessage(BizResultEnum.R_NAME.getBizMessage());
             return result;
         }
-        if (ConvertUtils.isEmpty(requirement.getTaskType())) {
+        if (ConvertUtils.isEmpty(requirementVo.getTaskType())) {
             //任务类型为空
             result.setBizCode(BizResultEnum.TASKTYPE.getBizCode());
             result.setMessage(BizResultEnum.TASKTYPE.getBizMessage());
             return result;
         }
-        if (ConvertUtils.isEmpty(requirement.getVocationType())) {
-            //行业类型为空
-            result.setBizCode(BizResultEnum.VOCATIONTYPE.getBizCode());
-            result.setMessage(BizResultEnum.VOCATIONTYPE.getBizMessage());
-            return result;
-        }
-        if (ConvertUtils.isEmpty(requirement.getCycleTime())) {
+        if (ConvertUtils.isEmpty(requirementVo.getCycleTime())) {
             //任务周期为空
             result.setBizCode(BizResultEnum.CYCLETIME.getBizCode());
             result.setMessage(BizResultEnum.CYCLETIME.getBizMessage());
             return result;
         }
-        if (ConvertUtils.isEmpty(requirement.getMinSalary()) || ConvertUtils.isEmpty(requirement.getMaxSalary())) {
+        if (ConvertUtils.isEmpty(requirementVo.getMinSalary()) || ConvertUtils.isEmpty(requirementVo.getMaxSalary())) {
             //薪资为空
             result.setBizCode(BizResultEnum.SALARY.getBizCode());
             result.setMessage(BizResultEnum.SALARY.getBizMessage());
             return result;
         }
-        if (ConvertUtils.isEmpty(requirement.getPartyB())) {
+        if (ConvertUtils.isEmpty(requirementVo.getPartyB())) {
             //服务方为空
             result.setBizCode(BizResultEnum.SALARY.getBizCode());
             result.setMessage(BizResultEnum.SALARY.getBizMessage());
             return result;
         }
-        if (ConvertUtils.isEmpty(requirement.getDescription())) {
+        if (ConvertUtils.isEmpty(requirementVo.getDescription())) {
             //描述为空
             result.setBizCode(BizResultEnum.DESCRIPTION.getBizCode());
             result.setMessage(BizResultEnum.DESCRIPTION.getBizMessage());
             return result;
         }
-        if (ConvertUtils.isEmpty(requirement.getUserId())) {
+        if (ConvertUtils.isEmpty(requirementVo.getUserId())) {
             //发布人id为空
             result.setBizCode(BizResultEnum.USER_ID.getBizCode());
             result.setMessage(BizResultEnum.USER_ID.getBizMessage());
             return result;
         }
+        if (ConvertUtils.isEmpty(requirementVo.getVocationTypeId())) {
+            //行业类别id为空
+            result.setBizCode(BizResultEnum.VOCATION_TYPE_ID.getBizCode());
+            result.setMessage(BizResultEnum.VOCATION_TYPE_ID.getBizMessage());
+            return result;
+        }
         //给定默认审核状态待审核
-        requirement.setCheckState(CheckStateEnum.EXAMINE_ING.getCode());
-        requirementService.save(requirement);
-        result.setResult(requirement);
+        requirementVo.setCheckState(CheckStateEnum.EXAMINE_ING.getCode());
+
+        requirementService.addReq(requirementVo);
+        result.setResult(requirementVo);
         log.debug("返回值为:" + JSON.toJSONString(result.getResult()));
         return result;
     }

@@ -50,15 +50,6 @@ public class Requirement extends BaseEntity {
     private BigDecimal maxSalary;
 
     /**
-     * 行业类型
-     * Table:     f_requirement
-     * Column:    vocation_type
-     * Nullable:  true
-     */
-    @ApiModelProperty(value = "行业类型",required = true)
-    private String vocationType;
-
-    /**
      * 任务类型(0佣金任务1周期任务2包月任务)
      * Table:     f_requirement
      * Column:    task_type
@@ -147,6 +138,15 @@ public class Requirement extends BaseEntity {
      */
     @ApiModelProperty(value = "需求所属用户的id",required = true)
     private Long userId;
+
+    /**
+     * 行业类型id
+     * Table:     f_requirement
+     * Column:    vocation_type_id
+     * Nullable:  true
+     */
+    @ApiModelProperty(value = "行业类型id",required = true)
+    private Long vocationTypeId;
 
 
 }

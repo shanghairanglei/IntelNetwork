@@ -1,4 +1,4 @@
-package org.forbes.workerRequirementController;
+package org.forbes.controller;
 
 import com.alibaba.fastjson.JSON;
 import io.swagger.annotations.Api;

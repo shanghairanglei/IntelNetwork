@@ -30,6 +30,10 @@ public class Result<T> implements Serializable {
 	public static final  String ADD_REQUIREMENT_MSG = "添加需求成功";
 	public static final  String ADD_REQUIREMENT_ERROR_MSG = "添加需求失败";
 
+	/****行业类别返回消息****/
+	public static final  String VOCATION_TYPE_MSG = "行业类别查询成功";
+	public static final  String VOCATION_TYPE_ERROR_MSG = "行业类别查询失败";
+
 
 
 	/**
