@@ -21,10 +21,7 @@ import org.forbes.comm.vo.Result;
 import org.forbes.dal.entity.Requirement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * 需求控制层
@@ -146,9 +143,46 @@ public class RequirementController {
             result.setMessage(BizResultEnum.SALARY.getBizMessage());
             return result;
         }
+        if (ConvertUtils.isEmpty(requirement.getDescription())) {
+            //描述为空
+            result.setBizCode(BizResultEnum.DESCRIPTION.getBizCode());
+            result.setMessage(BizResultEnum.DESCRIPTION.getBizMessage());
+            return result;
+        }
         //给定默认审核状态待审核
         requirement.setCheckState(CheckStateEnum.EXAMINE_ING.getCode());
         requirementService.save(requirement);
+        result.setResult(requirement);
+        log.debug("返回值为:" + JSON.toJSONString(result.getResult()));
+        return result;
+    }
+
+
+    /***
+     * selectPage方法慨述:查看任务详情
+     * @param id
+     * @return Result<SysPermission>
+     * @创建人 frunk
+     * @创建时间 2019年12月10日 下午1:48:45
+     * @修改人 (修改了该文件，请填上修改人的名字)
+     * @修改日期 (请填上修改该文件时的日期)
+     */
+    @RequestMapping(value = "/detail/{id}", method = RequestMethod.GET)
+    @ApiOperation(value = "查看任务详情")
+    @ApiResponses(value = {
+            @ApiResponse(code = 500, message = Result.REQUIREMENT_ERROR_MSG),
+            @ApiResponse(code = 200, message = Result.REQUIREMENT_MSG)
+    })
+    public Result<Requirement> detail(@PathVariable String id) {
+        log.debug("传入参数为：" + JSON.toJSONString(id));
+        Result<Requirement> result = new Result<Requirement>();
+        if (ConvertUtils.isEmpty(id)) {
+            //任务id参数为空
+            result.setBizCode(BizResultEnum.EMPTY.getBizCode());
+            result.setMessage(BizResultEnum.EMPTY.getBizMessage());
+            return result;
+        }
+        Requirement requirement = requirementService.getById(id);
         result.setResult(requirement);
         log.debug("返回值为:" + JSON.toJSONString(result.getResult()));
         return result;
