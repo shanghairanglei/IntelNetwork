@@ -1,17 +1,11 @@
 package org.forbes.dal.mapper;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.forbes.dal.entity.Requirement;
 
-public interface RequirementMapper {
-    int deleteByPrimaryKey(Long id);
+/**
+ * @author Administrator
+ */
+public interface RequirementMapper extends BaseMapper<Requirement> {
 
-    int insert(Requirement record);
-
-    int insertSelective(Requirement record);
-
-    Requirement selectByPrimaryKey(Long id);
-
-    int updateByPrimaryKeySelective(Requirement record);
-
-    int updateByPrimaryKey(Requirement record);
 }

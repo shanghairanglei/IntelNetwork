@@ -1,53 +1,23 @@
 package org.forbes.dal.entity;
 
 import java.util.Date;
+
+import com.baomidou.mybatisplus.annotation.TableName;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
  * Table: f_worker_requirement
+ * @author Administrator
  */
 @Data
+@ApiModel(description="权限信息")
+@EqualsAndHashCode(callSuper = false)
+@TableName("f_worker_requirement")
 public class WorkerRequirement extends BaseEntity {
     private static final long serialVersionUID = -817172619463424915L;
-    /**
-     * id
-     * Table:     f_worker_requirement
-     * Column:    id
-     * Nullable:  false
-     */
-    private Long id;
-
-    /**
-     * 创建人
-     * Table:     f_worker_requirement
-     * Column:    create_by
-     * Nullable:  true
-     */
-    private String createBy;
-
-    /**
-     * 创建时间
-     * Table:     f_worker_requirement
-     * Column:    create_time
-     * Nullable:  true
-     */
-    private Date createTime;
-
-    /**
-     * 修改时间
-     * Table:     f_worker_requirement
-     * Column:    update_time
-     * Nullable:  true
-     */
-    private Date updateTime;
-
-    /**
-     * 修改人
-     * Table:     f_worker_requirement
-     * Column:    update_by
-     * Nullable:  true
-     */
-    private String updateBy;
 
     /**
      * 需求id
@@ -55,6 +25,7 @@ public class WorkerRequirement extends BaseEntity {
      * Column:    require_id
      * Nullable:  true
      */
+    @ApiModelProperty(value = "需求id",example = "0")
     private Long requireId;
 
     /**
@@ -63,6 +34,7 @@ public class WorkerRequirement extends BaseEntity {
      * Column:    worker_id
      * Nullable:  true
      */
+    @ApiModelProperty(value = "用户id（工作人员id）",example = "0")
     private Long workerId;
 
     /**
@@ -71,5 +43,6 @@ public class WorkerRequirement extends BaseEntity {
      * Column:    state
      * Nullable:  true
      */
+    @ApiModelProperty(value = "竞标状态(0未竞标1已竞标)")
     private String state;
 }

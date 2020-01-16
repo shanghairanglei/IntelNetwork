@@ -2,22 +2,25 @@ package org.forbes.dal.entity;
 
 import java.math.BigDecimal;
 import java.util.Date;
+
+import com.baomidou.mybatisplus.annotation.TableName;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
  * Table: f_requirement
+ *
+ * @author Administrator
  */
 @Data
+@ApiModel(description = "需求实体类")
+@EqualsAndHashCode(callSuper = false)
+@TableName("f_requirement")
 public class Requirement extends BaseEntity {
 
     private static final long serialVersionUID = -1113065399582467964L;
-    /**
-     * id
-     * Table:     f_requirement
-     * Column:    id
-     * Nullable:  false
-     */
-    private Long id;
 
     /**
      * 需求名称
@@ -25,23 +28,8 @@ public class Requirement extends BaseEntity {
      * Column:    r_name
      * Nullable:  true
      */
-    private String rName;
-
-    /**
-     * 需求创建时间
-     * Table:     f_requirement
-     * Column:    createtime
-     * Nullable:  true
-     */
-    private Date createtime;
-
-    /**
-     * 需求修改时间
-     * Table:     f_requirement
-     * Column:    updatetime
-     * Nullable:  true
-     */
-    private Date updatetime;
+    @ApiModelProperty(value = "需求名称",required = true)
+    private String name;
 
     /**
      * 最低薪水
@@ -49,6 +37,7 @@ public class Requirement extends BaseEntity {
      * Column:    min_salary
      * Nullable:  true
      */
+    @ApiModelProperty(value = "最低薪水", example = "0",required = true)
     private BigDecimal minSalary;
 
     /**
@@ -57,6 +46,7 @@ public class Requirement extends BaseEntity {
      * Column:    max_salary
      * Nullable:  true
      */
+    @ApiModelProperty(value = "最高薪水", example = "0",required = true)
     private BigDecimal maxSalary;
 
     /**
@@ -65,14 +55,16 @@ public class Requirement extends BaseEntity {
      * Column:    vocation_type
      * Nullable:  true
      */
+    @ApiModelProperty(value = "行业类型",required = true)
     private String vocationType;
 
     /**
-     * 任务类型
+     * 任务类型(0佣金任务1周期任务2包月任务)
      * Table:     f_requirement
      * Column:    task_type
      * Nullable:  true
      */
+    @ApiModelProperty(value = "任务类型(0佣金任务1周期任务2包月任务)",required = true)
     private String taskType;
 
     /**
@@ -81,6 +73,7 @@ public class Requirement extends BaseEntity {
      * Column:    cycle_time
      * Nullable:  true
      */
+    @ApiModelProperty(value = "项目周期（xx个月）", example = "0",required = true)
     private Integer cycleTime;
 
     /**
@@ -89,22 +82,25 @@ public class Requirement extends BaseEntity {
      * Column:    description
      * Nullable:  true
      */
+    @ApiModelProperty(value = "项目要求,描述",required = true)
     private String description;
 
     /**
-     * 审核状态（0未通过1通过(初期默认通过)2待审核）
+     * 审核状态（0未通过1通过2待审核）
      * Table:     f_requirement
      * Column:    check_state
      * Nullable:  true
      */
+    @ApiModelProperty(value = "审核状态（0未通过1通过2待审核）,前端不传值")
     private String checkState;
 
     /**
-     * 是否议价（0不可议价1可议价）
+     * 是否议价（0否1是）
      * Table:     f_requirement
      * Column:    is_premium
      * Nullable:  true
      */
+    @ApiModelProperty(value = "是否议价（0否1是）")
     private String isPremium;
 
     /**
@@ -113,45 +109,35 @@ public class Requirement extends BaseEntity {
      * Column:    amount
      * Nullable:  true
      */
+    @ApiModelProperty(value = "竞标人数", example = "0")
     private Integer amount;
 
     /**
-     * 是否外派
+     * 是否主场
      * Table:     f_requirement
      * Column:    is_assignment
      * Nullable:  true
      */
+    @ApiModelProperty(value = "是否主场,0否1是")
     private String isAssignment;
 
     /**
-     * 创建人
+     * 任务图标
      * Table:     f_requirement
-     * Column:    create_by
+     * Column:    icon
      * Nullable:  true
      */
-    private String createBy;
+    @ApiModelProperty(value = "任务图标")
+    private String icon;
 
     /**
-     * 创建时间
+     * 服务方(0:不限制,1:个人,2:团队)
      * Table:     f_requirement
-     * Column:    create_time
+     * Column:    party_B
      * Nullable:  true
      */
-    private Date createTime;
+    @ApiModelProperty(value = "服务方(0:不限制,1:个人,2:团队)",required = true)
+    private String partyB;
 
-    /**
-     * 修改时间
-     * Table:     f_requirement
-     * Column:    update_time
-     * Nullable:  true
-     */
-    private Date updateTime;
 
-    /**
-     * 修改人
-     * Table:     f_requirement
-     * Column:    update_by
-     * Nullable:  true
-     */
-    private String updateBy;
 }

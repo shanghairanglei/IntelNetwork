@@ -1,53 +1,23 @@
 package org.forbes.dal.entity;
 
 import java.util.Date;
+
+import com.baomidou.mybatisplus.annotation.TableName;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
  * Table: f_user_requirement
+ * @author Administrator
  */
 @Data
+@ApiModel(description="用户需求中间表")
+@EqualsAndHashCode(callSuper = false)
+@TableName("f_user_requirement")
 public class UserRequirement extends BaseEntity {
     private static final long serialVersionUID = -6855925341392769155L;
-    /**
-     * id
-     * Table:     f_user_requirement
-     * Column:    id
-     * Nullable:  false
-     */
-    private Long id;
-
-    /**
-     * 创建人
-     * Table:     f_user_requirement
-     * Column:    create_by
-     * Nullable:  true
-     */
-    private String createBy;
-
-    /**
-     * 创建时间
-     * Table:     f_user_requirement
-     * Column:    create_time
-     * Nullable:  true
-     */
-    private Date createTime;
-
-    /**
-     * 修改时间
-     * Table:     f_user_requirement
-     * Column:    update_time
-     * Nullable:  true
-     */
-    private Date updateTime;
-
-    /**
-     * 修改人
-     * Table:     f_user_requirement
-     * Column:    update_by
-     * Nullable:  true
-     */
-    private String updateBy;
 
     /**
      * 需求id
@@ -55,6 +25,7 @@ public class UserRequirement extends BaseEntity {
      * Column:    require_id
      * Nullable:  true
      */
+    @ApiModelProperty(value = "需求id",example = "0")
     private Long requireId;
 
     /**
@@ -63,5 +34,6 @@ public class UserRequirement extends BaseEntity {
      * Column:    user_id
      * Nullable:  true
      */
+    @ApiModelProperty(value = "用户id（发布需求人）",example = "0")
     private Long userId;
 }

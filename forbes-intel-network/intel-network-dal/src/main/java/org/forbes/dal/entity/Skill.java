@@ -1,53 +1,23 @@
 package org.forbes.dal.entity;
 
 import java.util.Date;
+
+import com.baomidou.mybatisplus.annotation.TableName;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
  * Table: f_skill
+ * @author Administrator
  */
 @Data
+@ApiModel(description="技能实体类")
+@EqualsAndHashCode(callSuper = false)
+@TableName("f_skill")
 public class Skill extends BaseEntity {
     private static final long serialVersionUID = -3889712948410672856L;
-    /**
-     * id
-     * Table:     f_skill
-     * Column:    id
-     * Nullable:  false
-     */
-    private Long id;
-
-    /**
-     * 创建人
-     * Table:     f_skill
-     * Column:    create_by
-     * Nullable:  true
-     */
-    private String createBy;
-
-    /**
-     * 创建时间
-     * Table:     f_skill
-     * Column:    create_time
-     * Nullable:  true
-     */
-    private Date createTime;
-
-    /**
-     * 修改时间
-     * Table:     f_skill
-     * Column:    update_time
-     * Nullable:  true
-     */
-    private Date updateTime;
-
-    /**
-     * 修改人
-     * Table:     f_skill
-     * Column:    update_by
-     * Nullable:  true
-     */
-    private String updateBy;
 
     /**
      * 技能名称
@@ -55,6 +25,7 @@ public class Skill extends BaseEntity {
      * Column:    name
      * Nullable:  true
      */
+    @ApiModelProperty(value = "技能名称")
     private String name;
 
     /**
@@ -63,6 +34,7 @@ public class Skill extends BaseEntity {
      * Column:    sort
      * Nullable:  true
      */
+    @ApiModelProperty(value = "排序",example = "0")
     private Integer sort;
 
     /**
@@ -71,5 +43,6 @@ public class Skill extends BaseEntity {
      * Column:    description
      * Nullable:  true
      */
+    @ApiModelProperty(value = "描述")
     private String description;
 }

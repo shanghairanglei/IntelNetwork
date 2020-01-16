@@ -8,13 +8,16 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
- * 是否枚举
+ * @author Administrator
  */
-public enum YesNoEnum {
+
+public enum TaskTypeEnum {
 
 
-    NO("0","否"),
-    YES("1","是");
+    COMMISSION("0", "佣金任务"),
+    CYCLE("1", "周期任务"),
+    MONTHLY_SUBSCRIPTION("2", "包月任务");
+
 
     /***编码
      */
@@ -34,9 +37,9 @@ public enum YesNoEnum {
      * @修改人 (修改了该文件，请填上修改人的名字)
      * @修改日期 (请填上修改该文件时的日期)
      */
-    public static boolean existsYesNoEnum(String code){
-        return Arrays.asList(YesNoEnum.values()).stream()
-                .filter(tEnum -> tEnum.getCode().equals(code)).count() > 0 ;
+    public static boolean existsTaskTypeEnum(String code) {
+        return Arrays.asList(TaskTypeEnum.values()).stream()
+                .filter(tEnum -> tEnum.getCode().equals(code)).count() > 0;
     }
 
 
@@ -48,9 +51,9 @@ public enum YesNoEnum {
      * @修改人 (修改了该文件，请填上修改人的名字)
      * @修改日期 (请填上修改该文件时的日期)
      */
-    public static List<Map<String,String>> receYesNos(){
-        return Arrays.asList(YesNoEnum.values()).stream().map(tEnum -> {
-            Map<String,String> reponseMap = Maps.newHashMap();
+    public static List<Map<String, String>> receYesNos() {
+        return Arrays.asList(TaskTypeEnum.values()).stream().map(tEnum -> {
+            Map<String, String> reponseMap = Maps.newHashMap();
             reponseMap.put("code", tEnum.getCode());
             reponseMap.put("name", tEnum.getName());
             return reponseMap;
@@ -63,12 +66,10 @@ public enum YesNoEnum {
      * @param code
      * @param name
      */
-    YesNoEnum(String code, String name){
+    TaskTypeEnum(String code, String name) {
         this.code = code;
         this.name = name;
     }
-
-
 
 
     /**

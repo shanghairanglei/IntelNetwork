@@ -6,14 +6,18 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-/***
- * NewsStausEnum概要说明：新闻附件文件类型
- * @author niehy(Frunk)
- */
-public enum NewsAttachEnum {
 
-    THUMBNAIL("0","缩略图"),
-    ATTACHMENTS("1","新闻附件");
+/**
+ * @author Administrator
+ */
+
+public enum CheckStateEnum {
+
+
+    NO_ADOPT("0", "未通过"),
+    YES_ADOPT("1", "已通过"),
+    EXAMINE_ING("2", "待审核");
+
 
     /***编码
      */
@@ -25,7 +29,7 @@ public enum NewsAttachEnum {
 
 
     /***
-     * existsNewsStausEnum方法慨述:
+     * existsUserStausEnum方法慨述:
      * @param code
      * @return boolean
      * @创建人 huanghy
@@ -33,26 +37,25 @@ public enum NewsAttachEnum {
      * @修改人 (修改了该文件，请填上修改人的名字)
      * @修改日期 (请填上修改该文件时的日期)
      */
-    public static boolean existsNewsAttachEnum(String code){
-        return Arrays.asList(NewsAttachEnum.values()).stream()
-                .filter(NewsAttach -> ((NewsAttachEnum)NewsAttach).getCode().equals(code)).count() > 0 ;
+    public static boolean existsTaskTypeEnum(String code) {
+        return Arrays.asList(CheckStateEnum.values()).stream()
+                .filter(tEnum -> tEnum.getCode().equals(code)).count() > 0;
     }
 
 
     /***
-     * receNewsStaus方法慨述:
+     * receUserStaus方法慨述:
      * @return List<Map<String,String>>
      * @创建人 huanghy
      * @创建时间 2019年12月7日 上午11:22:07
      * @修改人 (修改了该文件，请填上修改人的名字)
      * @修改日期 (请填上修改该文件时的日期)
      */
-    public static List<Map<String,String>> receNewsAttach(){
-        return Arrays.asList(NewsAttachEnum.values()).stream().map(newsAttach -> {
-            Map<String,String> reponseMap = Maps.newHashMap();
-            NewsAttachEnum newsAttachs = ((NewsAttachEnum)newsAttach);
-            reponseMap.put("code", newsAttachs.getCode());
-            reponseMap.put("name", newsAttachs.getName());
+    public static List<Map<String, String>> receYesNos() {
+        return Arrays.asList(CheckStateEnum.values()).stream().map(tEnum -> {
+            Map<String, String> reponseMap = Maps.newHashMap();
+            reponseMap.put("code", tEnum.getCode());
+            reponseMap.put("name", tEnum.getName());
             return reponseMap;
         }).collect(Collectors.toList());
     }
@@ -63,12 +66,10 @@ public enum NewsAttachEnum {
      * @param code
      * @param name
      */
-    NewsAttachEnum(String code, String name){
+    CheckStateEnum(String code, String name) {
         this.code = code;
         this.name = name;
     }
-
-
 
 
     /**

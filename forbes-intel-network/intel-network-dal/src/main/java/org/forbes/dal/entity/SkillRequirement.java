@@ -1,53 +1,24 @@
 package org.forbes.dal.entity;
 
 import java.util.Date;
+
+import com.baomidou.mybatisplus.annotation.TableName;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
  * Table: f_skill_requirement
+ * @author Administrator
  */
 @Data
+@ApiModel(description="技能需求中间表")
+@EqualsAndHashCode(callSuper = false)
+@TableName("f_skill_requirement")
 public class SkillRequirement extends BaseEntity {
     private static final long serialVersionUID = 4389633361054873562L;
-    /**
-     * id
-     * Table:     f_skill_requirement
-     * Column:    id
-     * Nullable:  false
-     */
-    private Long id;
 
-    /**
-     * 创建人
-     * Table:     f_skill_requirement
-     * Column:    create_by
-     * Nullable:  true
-     */
-    private String createBy;
-
-    /**
-     * 创建时间
-     * Table:     f_skill_requirement
-     * Column:    create_time
-     * Nullable:  true
-     */
-    private Date createTime;
-
-    /**
-     * 修改人
-     * Table:     f_skill_requirement
-     * Column:    update_by
-     * Nullable:  true
-     */
-    private String updateBy;
-
-    /**
-     * 修改时间
-     * Table:     f_skill_requirement
-     * Column:    update_time
-     * Nullable:  true
-     */
-    private Date updateTime;
 
     /**
      * 技能id
@@ -55,6 +26,7 @@ public class SkillRequirement extends BaseEntity {
      * Column:    skill_id
      * Nullable:  true
      */
+    @ApiModelProperty(value = "技能id",example = "0")
     private Long skillId;
 
     /**
@@ -63,5 +35,6 @@ public class SkillRequirement extends BaseEntity {
      * Column:    user_id
      * Nullable:  true
      */
+    @ApiModelProperty(value = "用户id",example = "0")
     private Long userId;
 }
