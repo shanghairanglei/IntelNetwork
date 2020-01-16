@@ -1,4 +1,4 @@
-package org.forbes;
+package org.forbes.requirementController;
 
 import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -9,6 +9,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import lombok.extern.slf4j.Slf4j;
+import org.forbes.IRequirementService;
 import org.forbes.comm.constant.ReqCommonConstant;
 import org.forbes.comm.constant.SaveValid;
 import org.forbes.comm.enums.BizResultEnum;
@@ -70,11 +71,11 @@ public class RequirementController {
             }
             //金额最低
             if (ConvertUtils.isNotEmpty(requirementPageDto.getMinSalary())) {
-                qw.eq(ReqCommonConstant.MIN_SALARY, requirementPageDto.getMinSalary());
+                qw.ge(ReqCommonConstant.MIN_SALARY, requirementPageDto.getMinSalary());
             }
             //金额最高
             if (ConvertUtils.isNotEmpty(requirementPageDto.getMaxSalary())) {
-                qw.eq(ReqCommonConstant.MAX_SALARY, requirementPageDto.getMaxSalary());
+                qw.le(ReqCommonConstant.MAX_SALARY, requirementPageDto.getMaxSalary());
             }
         }
         IPage<Requirement> page = new Page<Requirement>(pageDto.getPageNo(), pageDto.getPageSize());
