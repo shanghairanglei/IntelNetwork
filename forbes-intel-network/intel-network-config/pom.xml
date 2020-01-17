@@ -3,15 +3,13 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <artifactId>forbes-intel-network</artifactId>
         <groupId>org.forbes</groupId>
+        <artifactId>forbes-intel-network</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
-
     <groupId>org.forbes</groupId>
     <artifactId>intel-network-config</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <packaging>maven-plugin</packaging>
     <name>intel-network-config</name>
     <url>http://maven.apache.org</url>
     <properties>
@@ -19,17 +17,6 @@
     </properties>
 
     <dependencies>
-        <dependency>
-            <groupId>org.forbes</groupId>
-            <artifactId>intel-network-config</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.12</version>
-            <scope>test</scope>
-        </dependency>
         <dependency>
             <groupId>org.forbes</groupId>
             <artifactId>intel-network-comm</artifactId>
@@ -46,10 +33,10 @@
                 <dependencies>
                     <dependency>
                         <groupId>org.forbes</groupId>
-                        <artifactId>intel-network-config</artifactId>
+                        <artifactId>intel-network-comm</artifactId>
                         <version>0.0.1-SNAPSHOT</version>
                         <scope>system</scope>
-                        <systemPath>${parentPath}intel-network-config/target/intel-network-config-0.0.1-SNAPSHOT.jar
+                        <systemPath>${parentPath}intel-network-comm/target/intel-network-comm-0.0.1-SNAPSHOT.jar
                         </systemPath>
                     </dependency>
                 </dependencies>
