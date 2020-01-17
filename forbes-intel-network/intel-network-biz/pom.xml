@@ -1,31 +1,30 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<?xml version="1.0"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <artifactId>forbes-intel-network</artifactId>
     <groupId>org.forbes</groupId>
+    <artifactId>forbes-intel-network</artifactId>
     <version>0.0.1-SNAPSHOT</version>
   </parent>
-
   <groupId>org.forbes</groupId>
   <artifactId>intel-network-biz</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  <packaging>maven-plugin</packaging>
   <name>intel-network-biz</name>
   <url>http://maven.apache.org</url>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
-
   <dependencies>
     <dependency>
-      <groupId>org.forbes</groupId>
-      <artifactId>intel-network-dal</artifactId>
-      <version>0.0.1-SNAPSHOT</version>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>3.8.1</version>
+      <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.forbes</groupId>
-      <artifactId>intel-network-comm</artifactId>
+      <artifactId>intel-network-dal</artifactId>
       <version>0.0.1-SNAPSHOT</version>
     </dependency>
   </dependencies>
@@ -38,17 +37,17 @@
         <dependencies>
           <dependency>
             <groupId>org.forbes</groupId>
-            <artifactId>intel-network-dal</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-            <scope>system</scope>
-            <systemPath>${parentPath}intel-network-dal/target/intel-network-dal-0.0.1-SNAPSHOT.jar</systemPath>
-          </dependency>
-          <dependency>
-            <groupId>org.forbes</groupId>
             <artifactId>intel-network-comm</artifactId>
             <version>0.0.1-SNAPSHOT</version>
             <scope>system</scope>
             <systemPath>${parentPath}intel-network-comm/target/intel-network-comm-0.0.1-SNAPSHOT.jar</systemPath>
+          </dependency>
+          <dependency>
+            <groupId>org.forbes</groupId>
+            <artifactId>intel-network-dal</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <scope>system</scope>
+            <systemPath>${parentPath}intel-network-dal/target/intel-network-dal-0.0.1-SNAPSHOT.jar</systemPath>
           </dependency>
         </dependencies>
       </plugin>
